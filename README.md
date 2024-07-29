@@ -113,8 +113,9 @@ This comprehensive database design enables Cineplex to offer a robust, real-time
 
 ### Homepage:
 
-![image](https://github.com/user-attachments/assets/594b1869-154d-400f-999f-fd24d6f4944c)
-![image](https://github.com/user-attachments/assets/02dabc02-ba33-459f-b317-57ed8e47a3ce)
+![image](https://github.com/user-attachments/assets/dad0d176-a5b5-4db5-b4a8-8159dc4e37a1)
+![image](https://github.com/user-attachments/assets/ec5eeec9-dcc4-4723-8596-265b97a28766)
+![image](https://github.com/user-attachments/assets/85edd4e7-b739-4b43-93b8-aa3f38c1f092)
 ![image](https://github.com/user-attachments/assets/f183938a-af77-4eb9-8712-b8ce36f08518)
 
 ### Login:

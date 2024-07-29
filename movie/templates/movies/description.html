@@ -1,0 +1,116 @@
+{% extends 'movies/base.html' %}
+{% load static %}
+
+{% block content %}
+  {% include 'movies/navbar.html' %}
+  <div class="overflow-x-hidden relative">
+    <div class="h-[90vh]">
+      <img src="{% if movie_details.primaryImage.url %}
+          {{ movie_details.primaryImage.url }}
+        {% elif movie_details.image.url %}
+          {{ movie_details.image.url }}
+        {% else %}
+          {{ default_image_url }}
+        {% endif %}"
+        class="d-block w-100 h-100 object-cover"
+        alt="image" />
+
+      <div class="overlay"></div>
+
+      <div class="movie-info w-90">
+        <div class="movie-poster">
+          <img src="{% if movie_details.primaryImage.url %}
+              {{ movie_details.primaryImage.url }}
+            {% elif movie_details.image.url %}
+              {{ movie_details.image.url }}
+            {% else %}
+              {{ default_image_url }}
+            {% endif %}"
+            class="d-block w-100 h-100 object-cover"
+            alt="image" />
+        </div>
+
+        <div class="movie-details flex-wrap mt-10">
+          <span class="premiere-tag">PREMIERE</span>
+          <p class="release-info">Brand new releases every Friday</p>
+          <h2 class="movie-title">{% if movie_details.movie_name %}{{movie_details.movie_name}}
+            {% elif movie_details.titleText.text %}
+            {{movie_details.titleText.text}}
+            {% endif %}</h2>
+          <p class="movie-meta">{% if movie_details.genres.0.text %}{{movie_details.genres.0.text}}
+            
+            {% endif %}</p>
+          <p class="movie-language">20222</p>
+          <p class="movie-description">{% if movie_details.description%} {{movie_details.description}}{% endif %}</p>
+          {% if live %}
+            <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 mt-3 px-4 bg-[#1466b8] text-white text-sm font-bold leading-normal tracking-[0.015em] mt-2"><a href="{% url 'theater' id=movie_details.id %}  "><span class="truncate">Book now!</span></a></button>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <br />
+    <div class="movie-full-details h-[500px] mt-5 p-10 flex lg:flex-row max-md:flex-col">
+      <div class="lg:w-[50%] max-md:w-100">
+        <h3>Description</h3>
+        <br />
+        <p>Finding himself in a new era, and approaching retirement, Indy wrestles with fitting into a world that seems to have outgrown him. But as the tentacles of an all-too-familiar evil return in the form of an old rival, Indy mustdon his hat and pick up his whip once more to make sure an ancient and powerful artifact doesn't fall into the wrong hands.</p>
+
+        <div class="mt-5">
+          <h3>Directed by</h3>
+          <br />
+          <p>James Mangold</p>
+        </div>
+      </div>
+      <div class="lg:w-[50%] max-md:w-100 max-md:mt-5 lg:pl-4">
+        <h3>Cast</h3>
+        <br />
+        <div class="cast-list">
+          <div class="cast-grid">
+            <div class="cast-member">
+              <img src="https://picsum.photos/200/300?random=1" alt="Harrison Ford" />
+              <div class="cast-info">
+                <span class="cast-name">Harrison Ford</span>
+                <span class="cast-role">Indiana Jones</span>
+              </div>
+            </div>
+            <div class="cast-member">
+              <img src="https://picsum.photos/200/300?random=1" alt="Phoebe Waller-Bridge" />
+              <div class="cast-info">
+                <span class="cast-name">Phoebe Waller-Bridge</span>
+                <span class="cast-role">Helena Shaw</span>
+              </div>
+            </div>
+            <div class="cast-member">
+              <img src="https://picsum.photos/200/300?random=1" alt="Mads Mikkelsen" />
+              <div class="cast-info">
+                <span class="cast-name">Mads Mikkelsen</span>
+                <span class="cast-role">Jürgen Voller</span>
+              </div>
+            </div>
+            <div class="cast-member">
+              <img src="https://picsum.photos/200/300?random=1" alt="Boyd Holbrook" />
+              <div class="cast-info">
+                <span class="cast-name">Boyd Holbrook</span>
+                <span class="cast-role">Klaber</span>
+              </div>
+            </div>
+            <div class="cast-member">
+              <img src="https://picsum.photos/200/300?random=1" alt="Olivier Richters" />
+              <div class="cast-info">
+                <span class="cast-name">Olivier Richters</span>
+                <span class="cast-role">Hauke</span>
+              </div>
+            </div>
+            <div class="cast-member">
+              <img src="https://picsum.photos/200/300?random=1" alt="Ethann Isidore" />
+              <div class="cast-info">
+                <span class="cast-name">Ethann Isidore</span>
+                <span class="cast-role">Teddy Kumar</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

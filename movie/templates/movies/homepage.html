@@ -1,0 +1,111 @@
+{% extends 'movies/base.html' %}
+{% load static %}
+
+{% block content %}
+  {% include 'movies/navbar.html' %}
+
+  <header>
+    <div id="carouselExampleIndicators" class="carousel slide h-[90vh] relative" data-mdb-ride="carousel" data-mdb-carousel-init>
+      <div class="carousel-inner" id="carousel-inner">
+        <!-- This will be populated by JavaScript -->
+        {% for movie in upcoming %}
+          <div class="carousel-item {% if forloop.first %}active{% endif %} relative h-[90vh]">
+            <img src="{{ movie.primaryImage.url|default:'' }}" class="d-block w-100 h-100 object-cover" alt="{{ movie.titleText.text|default:'' }}" />
+            <div class="overlay"></div>
+            <div class="movie-info w-50">
+              <a href="description/{{ movie.id }}">
+                <div class="movie-poster">
+                  <img src="{{ movie.primaryImage.url|default:'' }}" alt="{{ movie.titleText.text|default:'' }} poster" class="w-100 h-100" />
+                </div>
+              </a>
+              <div class="movie-details flex-wrap">
+                <span class="premiere-tag">PREMIERE</span>
+                <p class="release-info">Brand new releases every Friday</p>
+                <h2 class="movie-title">{{ movie.titleText.text|default:'' }}</h2>
+                <p class="movie-meta">{{ movie.titleType.text|default:'' }}</p>
+                <p class="movie-language">{{ movie.releaseYear.year|default:'' }}</p>
+                <p class="movie-description d-none d-lg-block">Description not available</p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <button class="carousel-control-prev" type="button" data-mdb-target="#carouselExampleIndicators" data-mdb-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-mdb-target="#carouselExampleIndicators" data-mdb-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </header>
+  <div class="pb-3">
+    <div class="flex border-b border-[#344d65] px-4 gap-8 justify-between">
+      <a class="flex flex-col items-center justify-center border-b-[3px] border-b-[#1466b8] text-white pb-[13px] pt-4" href="#"><p class="text-white text-sm font-bold leading-normal tracking-[0.015em]">In Theaters</p></a>
+      <form>
+        <div class="flex flex-row gap-2">
+          <input placeholder="Search" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-0 border border-[#344d65] bg-[#1a2632] focus:border-[#344d65] h-5 mt-3 placeholder:text-[#93adc8] p-[15px] text-base font-normal leading-normal" value="" name="search" type="text" />
+
+          <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 mt-3 px-4 bg-[#1466b8] text-white text-sm font-bold leading-normal tracking-[0.015em]"><span class="truncate">Search</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="p-3">
+  <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Latest releases</h2>
+  <div class="swiper-container">
+    <div class="swiper-wrapper" id="upcoming-movies-container">
+      <!-- This will be populated by JavaScript -->
+      {% for movie in latest_movies %}
+        <div class="swiper-slide">
+          <div class="flex flex-col gap-3 pb-3">
+            <a href="description/{{ movie.id }}"><div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl" style="background-image: url('{{ movie.image.url|default:'' }}')"></div></a>
+            <p class="text-white text-base font-medium leading-normal mt-2">{{ movie.movie_name|default:'Untitled' }}</p>
+            <p class="text-[#93adc8] text-sm font-normal leading-normal">{{ movie.genres.0.text|default:'Genre not specified' }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+  </div>
+  <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">New &amp; upcoming releases</h2>
+  <div class="swiper-container">
+    <div class="swiper-wrapper" id="upcoming-movies-container">
+      <!-- This will be populated by JavaScript -->
+      {% for movie in upcoming %}
+        <div class="swiper-slide">
+          <div class="flex flex-col gap-3 pb-3">
+            <a href="description/{{ movie.id }}"><div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl" style="background-image: url('{{ movie.primaryImage.url|default:'' }}')"></div></a>
+            <p class="text-white text-base font-medium leading-normal mt-2">{{ movie.titleText.text|default:'Untitled' }}</p>
+            <p class="text-[#93adc8] text-sm font-normal leading-normal">{{ movie.genres.0.text|default:'Genre not specified' }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+  </div>
+
+  <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Anime World</h2>
+  <div class="swiper-container">
+    <div class="swiper-wrapper" id="anime-container">
+      <!-- This will be populated by JavaScript -->
+      {% for anime in all_anime %}
+        <div class="swiper-slide">
+          <div class="flex flex-col gap-3 pb-3">
+            <a href="description/{{ anime.id }}"><div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl" style="background-image: url('{{ anime.image|default:'' }}');"></div></a>
+            <p class="text-white text-base font-medium leading-normal mt-2">{{ anime.title|default:'Untitled' }}</p>
+            <p class="text-[#93adc8] text-sm font-normal leading-normal">{{ anime.genres.0|default:'Genre not specified' }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+ 
+    
+  </div>
+</div>
+{% include 'movies/footer.html' %}
+  <script src="{% static 'movies/util/slider.js' %}"></script>
+{% endblock %}

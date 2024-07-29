@@ -1,0 +1,36 @@
+{% extends 'movies/base.html' %}
+{% load static %}
+
+{% block content %}
+  {% include 'movies/navbar.html' %}
+<div class="flex flex-col items-center mt-3">
+  <h2 class="text-[20px] text-white">{{ showtime.movie.movie_name }} - {{ showtime.date }} {{ showtime.time }}</h2>
+  <div id="screen" class="screen text-center">
+    <span>Screen</span>
+  </div>
+  <div id="theater-layout" class="theater-layout">
+    {% for row in seats_layout %}
+      <div class="seat-row flex flex-row m-3">
+        {% for seat in row %}
+          {% if seat %}
+            <div class="seat {{ seat.status }}" data-seat-number="{{ seat.seat_number }}">
+              {{ seat.seat_number }}
+            </div>
+          {% else %}
+            <div class="space"></div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <form id="booking-form" method="post" action="{% url 'seatselected' %}">
+      {% csrf_token %}
+      <input type="hidden" name="showtime_id" value="{{ showtime.id }}">
+      <input type="hidden" name="selected_seats" id="selected-seats">
+      <button type="submit" class="btn btn-primary">Book Selected Seats</button>
+    </form>
+  <div>
+
+  <script src="{% static 'movies/util/seat.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends "movies/base.html" %}
+{% load static %}
+{% block content %}
+  {% include 'movies/navbar.html' %}
+ 
+<div class=" text-white p-10 lg:w-[70%] lg:ml-[15%]">
+  <div class="flex justify-center">
+  <h1 class="text-3xl  font-bold mb-4">Payment Details</h1>
+  </div>
+  <div class="mb-6">
+    <h2 class="text-lg text-white font-semibold mb-2">Movie</h2>
+    <div class="flex items-center">
+      <img src="{{ showtime.movie.image.url }}" alt="image" class="w-12 h-12 rounded mr-3">
+      <div>
+        <p class="font-semibold">{{ showtime.movie.movie_name }}</p>
+        <p class="text-sm ">{{ showtime.theater.name }}</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="mb-6">
+    <h2 class="text-lg font-semibold mb-2 text-white">Showtime</h2>
+    <div class="flex items-center">
+      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+      <div>
+        <p class="font-semibold">{{ showtime.time }}</p>
+        <p class="text-sm "> {{ showtime.date }} • {{ showtime.time }}</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="mb-6">
+    <h2 class="text-lg text-white font-semibold mb-2">Seats</h2>
+    <div class="flex justify-between items-center mb-2">
+      <div class="flex items-center">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+        <div>
+          <p class="font-semibold">{{ seatselected }}</p>
+          
+        </div>
+      </div>
+      <p class="font-semibold">₹{{ price }}</p>
+    </div>
+    
+  </div>
+  
+  <div class="flex justify-between items-center mb-6">
+    <p class="font-semibold">Subtotal</p>
+    <p class="font-semibold">₹{{ price }}</p>
+  </div>
+  
+
+  <!-- Payment form/button -->
+ <form id="payment-form">
+    
+    <div class="flex justify-end">
+  <button id="checkout-button" type="button" class=" min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#1466b8] text-white text-sm font-bold leading-normal tracking-[0.015em]">Pay</button>
+</div>
+  </form>
+</div>
+  <script src="https://js.stripe.com/v3/"></script>
+  <script>
+    const stripe = Stripe('{{ stripe_public_key }}'); // Use the passed key
+    const checkoutButton = document.getElementById('checkout-button');
+
+    checkoutButton.addEventListener('click', function () {
+      fetch('/create_checkout_session/')
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (session) {
+          return stripe.redirectToCheckout({ sessionId: session.sessionId });
+        })
+        .then(function (result) {
+          if (result.error) {
+            alert(result.error.message);
+          }
+        })
+        .catch(function (error) {
+          console.error('Error:', error);
+        });
+    });
+  </script> 
+{% endblock %}

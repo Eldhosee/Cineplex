@@ -1,0 +1,12 @@
+{% extends "movies/base.html" %}
+{% load static %}
+{% block content %}
+  {% include 'movies/navbar.html' %}
+  <div class="content-container flex justify-center items-center h-[80vh]">
+    <div class="content text-center">
+      <div class="fas fa-check-circle symbol text-7xl mb-4"></div>
+      <div class="title mb-2 font-bold">Thank you for Booking!</div>
+      <div class="text">Your booking has been confirmed. you can view your booking in history</div>
+    </div>
+  </div>
+{% endblock %}

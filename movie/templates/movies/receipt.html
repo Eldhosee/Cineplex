@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #1466b8;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .booking-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+        }
+
+        .movie-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+
+        .details {
+            flex-grow: 1;
+        }
+
+        .details h2 {
+            margin: 0;
+            color: #333;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .details p {
+            margin: 4px 0;
+            color: #555;
+        }
+
+        .details span {
+            color: #777;
+            font-size: 14px;
+        }
+    </style>
+    <title>Booking Receipt</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Your Booking Receipt</h1>
+        {% for i in history %}
+        <div class="booking-item">
+            <img src="{{ i.showtime.movie.image.url }}" alt="{{ i.showtime.movie.movie_name }}" class="movie-image">
+            <div class="details">
+                <h2>{{ i.showtime.movie.movie_name }}</h2>
+                <p>Theater: {{ i.showtime.theater }}</p>
+                <p>Date: {{ i.showtime.date }}</p>
+                <p>Time: {{ i.showtime.time }}</p>
+                <span>Booking ID: {{ i.id }}</span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

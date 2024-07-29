@@ -1,0 +1,12 @@
+{% extends "movies/base.html" %}
+{% load static %}
+{% block content %}
+  {% include 'movies/navbar.html' %}
+  <div class="content-container flex justify-center items-center">
+    <div class="content text-center">
+      <div class="fas fa-times-circle symbol text-7xl mb-4 text-red-500"></div>
+      <div class="title mb-2 font-bold">Booking Cancelled</div>
+      <div class="text">Your booking has been cancelled. Please try again</div>
+    </div>
+  </div>
+{% endblock %}

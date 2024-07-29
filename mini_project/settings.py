@@ -13,7 +13,7 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['cineplex-dlbe.onrender.com', 'localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
     

@@ -5,8 +5,8 @@
   {% include 'movies/navbar.html' %}
   <div class="overflow-x-hidden relative">
     <div class="h-[90vh]">
-      <img src="{% if movie_details.primaryImage.url %}
-          {{ movie_details.primaryImage.url }}
+      <img src="{% if movie_details.movie.primaryImage.url %}
+          {{ movie_details.movie.primaryImage.url }}
         {% elif movie_details.image.url %}
           {{ movie_details.image.url }}
         {% else %}
@@ -19,8 +19,8 @@
 
       <div class="movie-info w-90">
         <div class="movie-poster">
-          <img src="{% if movie_details.primaryImage.url %}
-              {{ movie_details.primaryImage.url }}
+          <img src="{% if movie_details.movie.primaryImage.url %}
+              {{ movie_details.movie.primaryImage.url }}
             {% elif movie_details.image.url %}
               {{ movie_details.image.url }}
             {% else %}
@@ -34,10 +34,11 @@
           <span class="premiere-tag">PREMIERE</span>
           <p class="release-info">Brand new releases every Friday</p>
           <h2 class="movie-title">{% if movie_details.movie_name %}{{movie_details.movie_name}}
-            {% elif movie_details.titleText.text %}
-            {{movie_details.titleText.text}}
+            {% elif movie_details.movie.titleText.text %}
+            {{movie_details.movie.titleText.text}}
             {% endif %}</h2>
-          <p class="movie-meta">{% if movie_details.genres.0.text %}{{movie_details.genres.0.text}}
+            
+          <p class="movie-meta">{% if movie_details.movie.genres.0.text %}{{movie_details.movie.genres.0.text}}
             
             {% endif %}</p>
           <p class="movie-language">20222</p>
@@ -113,4 +114,5 @@
       </div>
     </div>
   </div>
+  <script>console.log('Movie Name: {{ movie_details}}');</script>
 {% endblock %}

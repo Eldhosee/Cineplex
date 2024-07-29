@@ -110,8 +110,9 @@ DATE_INPUT_FORMATS = [
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'movie', 'static'),
+    os.path.join(BASE_DIR, 'movie/static'),
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -128,4 +129,3 @@ CLOUDINARY_STORAGE = {
 
 STRIPE_PUBLISHABLE_KEY = config('STRIPE_PUBLISHABLE_KEY')
 STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

@@ -109,7 +109,7 @@ Cineplex employs a comprehensive database structure to support its feature-rich 
 
 This comprehensive database design enables Cineplex to offer a robust, real-time booking system with features like dynamic seat selection, flexible pricing, and user ratings, while maintaining data integrity and system performance.
 
-## Sreen Shots:
+## Screen Shots:
 
 ### Homepage:
 
@@ -144,6 +144,14 @@ This comprehensive database design enables Cineplex to offer a robust, real-time
 ### payment details 
 
 ![image](https://github.com/user-attachments/assets/02b1e98a-714a-44a8-9710-afe43544fa31)
+
+
+### Stripe
+
+![image](https://github.com/user-attachments/assets/2d91f20c-0fdf-4fa7-b887-58bdaa83527f)
+
+![image](https://github.com/user-attachments/assets/fcd64f55-c47e-44e9-acaf-a6d760ca2791)
+
 
 
 

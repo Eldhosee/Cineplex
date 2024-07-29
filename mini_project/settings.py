@@ -1,13 +1,14 @@
 import os
 from decouple import config
+from pathlib import Path  # Importing Path for path manipulation
+
 # settings.py
 
 STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
 STRIPE_PUBLISHABLE_KEY = config('STRIPE_PUBLISHABLE_KEY')
 
-
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Convert BASE_DIR to a Path object
+BASE_DIR = Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 SECRET_KEY = config('SECRET_KEY')
 
@@ -16,7 +17,6 @@ DEBUG = True
 ALLOWED_HOSTS = ['cineplex-87ag.onrender.com', 'localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
-    
     'movie',
     'jazzmin',
     'django.contrib.admin',
@@ -27,11 +27,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary_storage',
     'cloudinary',
-    'import_export'
+    'import_export',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -41,12 +42,14 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'mini_project.urls'
+
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
         'LOCATION': 'my_cache_table',
     }
 }
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -58,7 +61,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                
             ],
         },
     },
@@ -74,7 +76,6 @@ DATABASES = {
         'PASSWORD': config('PASSWORD'),
         'HOST': config('HOST'),
         'PORT': config('PORT'),
-        
     }
 }
 
@@ -105,19 +106,21 @@ USE_TZ = True
 USE_L10N = False
 
 DATE_INPUT_FORMATS = [
-    '%b %d, %Y', 
+    '%b %d, %Y',
 ]
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'movie/static'),
-]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = BASE_DIR / "staticfiles"  # Corrected STATIC_ROOT using Path
 
+STATICFILES_DIRS = [
+    BASE_DIR / "movie" / "static",  # Corrected STATICFILES_DIRS using Path
+]
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR / 'media'  # Using Path for MEDIA_ROOT
 MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
